@@ -15,13 +15,16 @@ public class ARTrackingManager : MonoBehaviour
     private ARPlaneManager _planeManager;
 
     [SerializeField]
+    private GameObject _prefabToSpawnFromPlane;
+
+    [SerializeField]
     private ARRaycastManager _raycastManager;
 
     // This stores the data of what string-prefab pair to instantiate
     [SerializeField]
     private List<ARTrackedImageData> _trackedImageDatas;
 
-    private List<ARRaycastHit> _raycastHits;
+    private readonly List<ARRaycastHit> _raycastHits = new();
 
     // Tracks the trackables that were instantiated
     private readonly Dictionary<string, GameObject> _spawnedTrackables = new();
@@ -55,6 +58,7 @@ public class ARTrackingManager : MonoBehaviour
             // We only need to detect the first point of contact
             return;
         }
+        Debug.Log("[AR] Touch detected");
 
         // We will check if the point in the screen that we touched actually has an ARPlane
         if(_raycastManager.Raycast(
@@ -62,8 +66,12 @@ public class ARTrackingManager : MonoBehaviour
             _raycastHits, // store the data of whatever ARRaycastHit information we got
             TrackableType.PlaneWithinPolygon)) // filter whatever trackable type we want
         {
-            // If we hit a plane
-            // Do something
+            Debug.Log("[AR] Trying to spawn object");
+            // If we hit a plane, spawn it where we clicked
+            var spawnedObject = Instantiate(
+                _prefabToSpawnFromPlane,
+                _raycastHits[0].pose.position,
+                _raycastHits[0].pose.rotation);
         }
                                              
     }

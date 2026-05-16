@@ -363,8 +363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ARTrackingManager
   _trackedImageManager: {fileID: 591953220}
-  _planeManager: {fileID: 0}
-  _raycastManager: {fileID: 0}
+  _planeManager: {fileID: 591953222}
+  _prefabToSpawnFromPlane: {fileID: 2159117000730916740, guid: bc2c8e81c41fe584bb9442b1aa71a3a1, type: 3}
+  _raycastManager: {fileID: 591953223}
   _trackedImageDatas:
   - ImageReferenceName: image_1
     PrefabToSpawn: {fileID: 2159117000730916740, guid: bc2c8e81c41fe584bb9442b1aa71a3a1, type: 3}
